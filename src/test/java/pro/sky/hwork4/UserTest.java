@@ -7,28 +7,28 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserTest {
     public String login = "User";
-    public String email = "User";
-    private final User out = new User("User", "User");
-
-    @Test
-    public void testUserConstructor(String login, String email) {
-        Assertions.assertNotNull(out);
-    }
+    public String email = "user@gmail.com";
 
     @Test
     public void testUserConstructor() {
-        Assertions.assertNull(out);
+        User out = new User(login, email);
+        Assertions.assertNotNull(login);
+        Assertions.assertNotNull(email);
     }
 
+    @Test
+    public void testUserConstructorNull() {
+        Assertions.assertNull(null);
+    }
 
     @Test
     public void shouldThrowIllegalArgumentExceptionWhenEmailContainsIllegalCharacter() {
+        String email = "user";
         Assertions.assertThrows(IllegalArgumentException.class, () -> new User(login, email));
     }
 
     @Test
     public void shouldTrowIllegalArgumentExceptionWhenLoginEqualEmail() {
-        Assertions.assertThrows(IllegalArgumentException.class, ()-> out.getLogin().equals(out.getEmail(email)));
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> new User("user", "user"));
     }
-
 }

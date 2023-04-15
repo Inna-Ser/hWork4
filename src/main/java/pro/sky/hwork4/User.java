@@ -11,14 +11,18 @@ public class User {
     }
 
     public User(String login, String email) throws IllegalArgumentException {
-        if (login != null || !login.isEmpty())
-            this.login = login;
-        if (email != null || !email.isEmpty()) {
-                char[] chars = email.toCharArray();
-                if (Arrays.asList(chars).contains("@") && Arrays.asList(chars).contains(".")) {
-                    this.email = email;
+        if (login != null && !login.isEmpty()) {
+            if (!login.equals(email)) {
+                this.login = login;
             } else {
-                throw new IllegalArgumentException("");
+                throw new IllegalArgumentException("Логин и пароль не должны совпадать");
+            }
+        }
+        if (email != null && !email.isEmpty()) {
+            if (email.contains("@") && email.contains(".")) {
+                this.email = email;
+            } else {
+                throw new IllegalArgumentException("Адрес должен содержать символы @ и .");
             }
         }
     }
